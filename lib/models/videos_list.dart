@@ -18,11 +18,11 @@ class VideosList {
     required this.pageInfo,
   });
 
-  String kind;
-  String etag;
-  String nextPageToken;
-  List<VideoItem> videos;
-  PageInfo pageInfo;
+  String? kind;
+  String? etag;
+  String?nextPageToken;
+  List<VideoItem>? videos;
+  PageInfo? pageInfo;
 
   factory VideosList.fromJson(Map<String, dynamic> json) => VideosList(
         kind: json["kind"],
@@ -37,8 +37,8 @@ class VideosList {
         "kind": kind,
         "etag": etag,
         "nextPageToken": nextPageToken,
-        "items": List<dynamic>.from(videos.map((x) => x.toJson())),
-        "pageInfo": pageInfo.toJson(),
+        "items": List<dynamic>.from(videos!.map((x) => x.toJson())),
+        "pageInfo": pageInfo!.toJson(),
       };
 }
 

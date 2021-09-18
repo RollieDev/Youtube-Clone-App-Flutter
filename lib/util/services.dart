@@ -7,7 +7,7 @@ import 'package:youtube_clone_app/models/videos_list.dart';
 import 'package:youtube_clone_app/util/constants.dart';
 
 class Services {
-  //
+  // ignore: constant_identifier_names
   static const CHANNEL_ID = 'UC14p9XBzofIsiGvNLpf0wkw';
   static const _baseURL = 'youtube.googleapis.com';
 

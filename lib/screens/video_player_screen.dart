@@ -4,7 +4,8 @@ import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 
 class VideoPlayerScreen extends StatefulWidget {
   //
-  const VideoPlayerScreen({Key? key, required this.videoItem}) : super(key: key);
+  const VideoPlayerScreen({Key? key, required this.videoItem})
+      : super(key: key);
   final VideoItem videoItem;
 
   @override
@@ -50,18 +51,16 @@ class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text(widget.videoItem.video.title),
-      ),
-      body: Container(
-          child: YoutubePlayer(
-              controller: _controller,
-              showVideoProgressIndicator: true,
-              onReady: () {
-                print('Player is ready.');
-                _isPlayerReady = true;
-              },
-              )),
-    );
+        appBar: AppBar(
+          title: Text(widget.videoItem.video.title),
+        ),
+        body: YoutubePlayer(
+          controller: _controller,
+          showVideoProgressIndicator: true,
+          onReady: () {
+            print('Player is ready.');
+            _isPlayerReady = true;
+          },
+        ));
   }
 }

@@ -7,6 +7,8 @@ import 'package:youtube_clone_app/screens/video_player_screen.dart';
 
 
 class HomeScreen extends StatefulWidget {
+  const HomeScreen({Key? key}) : super(key: key);
+
   @override
   _HomeScreenState createState() => _HomeScreenState();
 }
@@ -27,7 +29,7 @@ class _HomeScreenState extends State<HomeScreen> {
     _loading = true;
     _nextPageToken = '';
     _scrollController = ScrollController();
-    _videosList = VideosList();
+    _videosList = VideosList(etag: '', kind: '', nextPageToken: '', pageInfo: null, videos: []);
     _videosList.videos = [];
     _getChannelInfo();
   }
@@ -48,9 +50,9 @@ class _HomeScreenState extends State<HomeScreen> {
       playListId: _playListId,
       pageToken: _nextPageToken,
     );
-    _nextPageToken = tempVideosList.nextPageToken;
-    _videosList.videos.addAll(tempVideosList.videos);
-    print('videos: ${_videosList.videos.length}');
+    _nextPageToken = tempVideosList.nextPageToken!;
+    _videosList.videos!.addAll(tempVideosList.videos!);
+    print('videos: ${_videosList.videos!.length}');
     print('_nextPageToken $_nextPageToken');
     setState(() {});
   }
@@ -69,7 +71,7 @@ class _HomeScreenState extends State<HomeScreen> {
             Expanded(
               child: NotificationListener<ScrollEndNotification>(
                 onNotification: (ScrollNotification notification) {
-                  if (_videosList.videos.length >=
+                  if (_videosList.videos!.length >=
                       int.parse(_item.statistics.videoCount)) {
                     return true;
                   }
@@ -81,9 +83,9 @@ class _HomeScreenState extends State<HomeScreen> {
                 },
                 child: ListView.builder(
                   controller: _scrollController,
-                  itemCount: _videosList.videos.length,
+                  itemCount: _videosList.videos!.length,
                   itemBuilder: (context, index) {
-                    VideoItem videoItem = _videosList.videos[index];
+                    VideoItem videoItem = _videosList.videos![index];
                     return InkWell(
                       onTap: () async {
                         Navigator.push(context,
@@ -94,14 +96,14 @@ class _HomeScreenState extends State<HomeScreen> {
                         }));
                       },
                       child: Container(
-                        padding: EdgeInsets.all(20.0),
+                        padding: const EdgeInsets.all(20.0),
                         child: Row(
                           children: [
                             CachedNetworkImage(
                               imageUrl: videoItem
                                   .video.thumbnails.thumbnailsDefault.url,
                             ),
-                            SizedBox(width: 20),
+                            const SizedBox(width: 20),
                             Flexible(child: Text(videoItem.video.title)),
                           ],
                         ),
@@ -119,9 +121,9 @@ class _HomeScreenState extends State<HomeScreen> {
 
   _buildInfoView() {
     return _loading
-        ? CircularProgressIndicator()
+        ? const CircularProgressIndicator()
         : Container(
-            padding: EdgeInsets.all(20.0),
+            padding: const EdgeInsets.all(20.0),
             child: Card(
               child: Padding(
                 padding: const EdgeInsets.all(10.0),
@@ -132,7 +134,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         _item.snippet.thumbnails.medium.url,
                       ),
                     ),
-                    SizedBox(width: 20),
+                    const SizedBox(width: 20),
                     Expanded(
                       child: Text(
                         _item.snippet.title,

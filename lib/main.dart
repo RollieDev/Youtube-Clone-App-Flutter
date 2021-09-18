@@ -19,7 +19,7 @@ class HomeApp extends StatelessWidget {
         primarySwatch: Colors.red,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home: HomeScreen(),
+      home: const HomeScreen(),
       );
   }
 }
